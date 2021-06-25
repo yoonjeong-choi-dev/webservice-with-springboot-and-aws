@@ -13,7 +13,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-
+/*
+* CAUTION!!!!!!
+* JPA 코드가 프로젝트에 있는 경우 해당 테스트는 에러가 난다
+* - WebMvcTest는 JPA 생성과 관련된 기능이 없는 어노테이션 
+* - SpringBootTest를 사용해야 JPA 관련 빈 주입이 가능 
+* - HelloControllerSpringBootTest 파일에서 구현
+* */
 
 @RunWith(SpringRunner.class)    // 스프링부트와 JUnit 사이의 연결자 역할 : SrpingRunner 실행자를 사용하여 JUnit 테스트
 @WebMvcTest(controllers = HelloController.class)    // Web에 집중할 수 있는 어노테이션 : 테스트할 컨트롤러 등록
