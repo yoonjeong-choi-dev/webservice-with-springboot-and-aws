@@ -2,3 +2,6 @@
 /.gradle/
 .gradle
 .idea
+
+# 인증 관련 파일
+application-oauth.properties
