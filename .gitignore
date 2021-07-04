@@ -5,3 +5,4 @@
 
 # 인증 관련 파일
 application-oauth.properties
+application-real-db.properties
