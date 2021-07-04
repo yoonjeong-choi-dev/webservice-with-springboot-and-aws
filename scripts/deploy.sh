@@ -2,7 +2,7 @@
 
 REPOSITORY=/home/ec2-user/app/step3
 PROJECT_NAME=webservice-with-springboot-and-aws
-
+JAVA_PROJECT_NAME=tutorial  # build.gradle이 정의된 프로젝트 이름 : 빌드시 tutorial-version.jar 형식으로 jar파일 생성
 
 
 echo "> Build 파일 복사"
@@ -10,7 +10,8 @@ cp $REPOSITORY/zip/*.jar $REPOSITORY/
 
 
 echo "> 현재 구동중인 애플리케이션 pid 확인"
-CURRENT_PID=$(pgrep -fl $(ls -tr ${REPOSITORY}/*.jar | tail -n 1) | cut -d ' ' -f 1)
+#CURRENT_PID=$(pgrep -fl $(ls -tr ${REPOSITORY}/*.jar | tail -n 1) | cut -d ' ' -f 1)
+CURRENT_PID=$(pgrep -fl ${JAVA_PROJECT_NAME} | awk '{print $1}')  # 현재
 
 echo "현재 구동중인 어플리케이션 pid: $CURRENT_PID"
 if [ -z "$CURRENT_PID" ]; then
