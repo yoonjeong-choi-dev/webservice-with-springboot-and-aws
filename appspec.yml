@@ -7,7 +7,7 @@ os: linux
 # CodeDeploy에서 전달해준 파일 중 destination으로 이동 시킬 source 지정
 files:
   - source:  /
-    destination: /home/ec2-user/app/step3/zip/
+    destination: /home/ec2-user/app/step4/zip/
     overwrite: yes
 
 # CodeDeploy -> EC2 로 넘겨진 파일에 대해서 ec2-user 권한을 갖도록 한다
@@ -20,7 +20,14 @@ permissions:
 # 배포 단계에서 실행할 명령어 지정
 hooks:
   AfterInstall:
+    - location: stop.sh # 엔진엑스와 연결되어 있지 않은 스프링 부트를 종료합니다.
+      timeout: 60
+      runas: ec2-user
   ApplicationStart:
-    - location: deploy.sh # ec2-user 권한으로 해당 스크립트를 실행 : 빌드된 파일(.jar)를 실행시키는 스크립트
+    - location: start.sh # 엔진엑스와 연결되어 있지 않은 Port로 새 버전의 스프링 부트를 시작(deploy.sh와 유사)
+      timeout: 60
+      runas: ec2-user
+  ValidateService:
+    - location: health.sh # 새 스프링 부트가 정상적으로 실행됐는지 확인 합니다.
       timeout: 60
       runas: ec2-user
