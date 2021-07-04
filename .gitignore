@@ -8,5 +8,5 @@ application-oauth.properties
 application-real-db.properties
 
 # 빌드 파일
-build
-out
+build/
+out/
